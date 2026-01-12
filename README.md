@@ -48,7 +48,7 @@ All sensor data is processed by the ESP32 to control the vehicle’s movement an
 
 ## Project Images
 ![TopView](https://github.com/Pravink12/Multi_Purpose-Bot-Using-IOT/blob/6ddb3299fbb92f1ac5697f6dad49c8d88484286b/Topview%20of%20the%20bot.png)
-![Sideview](https://github.com/Pravink12/Multi-Purpose-Bot-Using-IOT/blob/0330d66f3d59d2cc5645662fc8352651bbfa8341/SideView%20of%20the%20bot.png)
+![Sideview](https://github.com/Pravink12/Multi_Purpose-Bot-Using-IOT/blob/f97ac1fa5201f863a737030cab78a8d34900e795/SideView%20of%20the%20bot.png)
 
 
 ## Future Enhancements
