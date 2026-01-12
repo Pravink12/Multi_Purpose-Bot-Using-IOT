@@ -1,0 +1,92 @@
+#include <SoftwareSerial.h>
+SoftwareSerial mySerial(D5, D6);
+const int in1=D0;//right forward
+const int in2=D2;//right backward
+const int in3=D4;//left forward
+const int in4=D3;//left backward
+
+int obstacle;
+int sensor;
+void setup() {
+pinMode(in1,OUTPUT);
+pinMode(in2,OUTPUT);
+pinMode(in3,OUTPUT);
+pinMode(in4,OUTPUT);
+pinMode(D7,INPUT);
+pinMode(A0,INPUT);
+
+delay(10000);
+Serial.begin(9600);
+mySerial.begin(9600);
+}
+
+void loop() {
+ML();
+digitalWrite(in1,HIGH);
+digitalWrite(in3,HIGH);
+obstacle=analogRead(A0);
+Serial.println(obstacle);
+if(obstacle<=14)
+{
+  digitalWrite(in1,LOW);
+  digitalWrite(in3,LOW);
+  delay(1000);
+  digitalWrite(in4,HIGH);
+  digitalWrite(in2,HIGH);
+  delay(1500);
+  digitalWrite(in4,LOW);
+  digitalWrite(in2,LOW);
+  delay(100);
+  digitalWrite(in2,HIGH);
+  digitalWrite(in3,HIGH);
+  delay(1300);
+  digitalWrite(in2,LOW);
+  digitalWrite(in3,LOW);  
+  delay(100);
+  digitalWrite(in1,HIGH);
+  digitalWrite(in3,HIGH);
+ 
+  
+}
+
+}
+
+void ML()
+{
+  sensor=digitalRead(D7);
+  if(sensor==1)
+  {
+  digitalWrite(in1,LOW);
+  digitalWrite(in3,LOW);
+  SendMessage();
+  delay(2000);
+  digitalWrite(in4,HIGH);
+  digitalWrite(in2,HIGH);
+  delay(1500);
+  digitalWrite(in4,LOW);
+  digitalWrite(in2,LOW);
+  digitalWrite(in1,HIGH);
+  digitalWrite(in4,HIGH);
+  delay(1300);
+  digitalWrite(in1,LOW);
+  digitalWrite(in4,LOW);  
+  digitalWrite(in1,HIGH);
+  digitalWrite(in3,HIGH);
+    
+  }
+  delay(100); 
+}
+
+void SendMessage()
+{
+Serial.println("I am in send");
+mySerial.println("AT+CMGF=1"); //Sets the GSM Module in Text Mode
+delay(1000); // Delay of 1000 milli seconds or 1 second
+mySerial.println("AT+CMGS=\"+917620384408\"\r"); // Replace x with mobile number
+delay(1000);
+mySerial.println("Bomb has detected");
+mySerial.println("https://maps.app.goo.gl/ef8aTcVh1oM9T1Pp9?g_st=aw");// The SMS text you want to send
+delay(100);
+mySerial.println((char)26);// ASCII code of CTRL+Z
+delay(1000);
+}
